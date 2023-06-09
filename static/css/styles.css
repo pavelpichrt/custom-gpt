@@ -1,0 +1,65 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.bubble {
+  max-width: 60%; /* Limit the width of the message bubble */
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.user-bubble {
+  align-self: flex-start; /* Align to the left */
+  background-color: #f3f3f3;
+}
+
+.assistant-bubble {
+  align-self: flex-end; /* Align to the right */
+  background-color: #4CAF50;
+  color: white;
+}
+
+#user-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+#error-modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+#error-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 20px;
+}
+
+#error-text {
+  margin-bottom: 10px;
+}
