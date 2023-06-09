@@ -9,9 +9,9 @@ SECRET_TOKEN=XXX OPENAI_API_KEY=sk-YYY python app.py
 
 App runs on localhost:80
 
-## Build and run container
+## Build and run a container
 
 ```bash
 docker build -t customgpt-service .
-docker run -p 80:80 chatgpt-service
+docker run -p 80:80 customgpt-service
 ```
