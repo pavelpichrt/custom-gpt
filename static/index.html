@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
     <title>CustomGPT: Web UI</title>
 </head>
-<body>
-    <div id="chat-container">
-    </div>
-    
-    <div id="input-container">
-        <textarea id="user-input" placeholder="Type your message..."></textarea>
-        <button id="submit-button" onclick="sendMessage()">Send</button>
-    </div>
 
-    <div id="error-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
-            <p id="error-text"></p>
+<body>
+    <div class="content-container">
+        <h1>Custom GPT</h1>
+        <div class="spinner-container"></div>
+
+        <div id="chat-container">
+        </div>
+
+        <div id="input-container">
+            <form id="chat-form" onsubmit="sendMessage()">
+                <textarea id="user-input" placeholder="Type your message..."></textarea>
+                <button type="submit" id="submit-button">Send</button>
+            </form>
+        </div>
+
+        <div id="error-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal()">&times;</span>
+                <p id="error-text"></p>
+            </div>
         </div>
     </div>
 
     <script src="/static/js/script.js"></script>
 </body>
+
 </html>

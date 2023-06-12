@@ -6,13 +6,21 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Make sure to set these variables to your OpenAI API key and your secret token
-openai.api_key=os.getenv('OPENAI_API_KEY')
-SECRET_TOKEN=os.getenv('SECRET_TOKEN')
+openai.api_key = os.getenv("OPENAI_API_KEY")
+SECRET_TOKEN = os.getenv("SECRET_TOKEN")
+expected_auth_header = f"Bearer {SECRET_TOKEN}"
 
-@app.route('/')
+
+@app.route("/")
 def index():
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, "index.html")
+
+
+@app.route("/check-token", methods=["POST"])
+def check_token():
+    auth_header = request.headers.get("Authorization")
+    return jsonify({"response": auth_header and auth_header == expected_auth_header})
+
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -20,31 +28,27 @@ def chat():
     auth_header = request.headers.get("Authorization")
 
     # Validate the secret token
-    if not auth_header or auth_header != f"Bearer {SECRET_TOKEN}":
+    if not auth_header or auth_header != expected_auth_header:
         return jsonify({"error": "Unauthorized"}), 401
 
     try:
-        # Get messages from request
         data = request.json
-        messages = data.get('messages')
-        
-        # Call chatGPT API using Chat Completions
+        messages = data.get("messages")
+
         openai_response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo',  # Specify the model you want to use
-            messages=messages
+            model="gpt-3.5-turbo",
+            messages=messages,
         )
-        
+
         # Extract the chatbot's response
-        chat_response = openai_response['choices'][0]['message']['content']
-        
+        chat_response = openai_response["choices"][0]["message"]["content"]
+
         # Return the response
-        return jsonify({'response': chat_response})
+        return jsonify({"response": chat_response})
 
     except Exception as e:
         return jsonify({"error": str(e)})
 
 
 if __name__ == "__main__":
-    # Running the app on port 80, make sure you have the necessary permissions
-    # On many systems, you might need to run this with administrative privileges``
     app.run(host="0.0.0.0", port=80)
