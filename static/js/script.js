@@ -36,7 +36,7 @@ async function sendMessage() {
 
   try {
       // Call the API
-      const response = await fetch('http://localhost/chat', {
+      const response = await fetch('https://voxwebapp.azurewebsites.net/chat', {
           method: 'POST',
           headers: {
               'Authorization': `Bearer ${SECRET_TOKEN}`,
