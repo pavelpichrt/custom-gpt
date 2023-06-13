@@ -1,5 +1,5 @@
-// const API_URL = 'https://voxwebapp.azurewebsites.net';
-const API_URL = 'http://localhost';
+const API_URL = 'https://voxwebapp.azurewebsites.net';
+// const API_URL = 'http://localhost';
 
 document.getElementById('user-input').addEventListener('keydown', event => {
   // When a shift is pressed, only add a new line.
