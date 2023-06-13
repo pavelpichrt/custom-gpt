@@ -6,6 +6,9 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+openai.api_type = "azure"
+openai.api_base = "https://nc-openai-poc.openai.azure.com/"
+openai.api_version = "2023-03-15-preview"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 SECRET_TOKEN = os.getenv("SECRET_TOKEN")
 expected_auth_header = f"Bearer {SECRET_TOKEN}"
@@ -36,8 +39,15 @@ def chat():
         messages = data.get("messages")
 
         openai_response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            # model="gpt-3.5-turbo",
+            engine="nc-openai-test-gpt-35-turbo",
             messages=messages,
+            temperature=0.7,
+            max_tokens=800,
+            top_p=0.95,
+            frequency_penalty=0,
+            presence_penalty=0,
+            stop=None,
         )
 
         # Extract the chatbot's response
